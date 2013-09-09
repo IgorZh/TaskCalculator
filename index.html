@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html ng-app>
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+    <div class="page-header">
+      <h1>Расчет сложности задачи.</h1>
+    </div>
+    <form role="form" class="form-horizontal" ng-controller="TaskCtrl">
+      <div class="row">
+        <div class="col-md-3">
+          <h2>Языки</h2>
+          <span class="help-block">Языки, на которых придется писать программисту.</span>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="calc.cSharp"> C#
+            </label>
+          </div>
+          <span class="help-block">Если предпологается серверная часть, т.е. почти всегда. <span class="label label-primary">Вес - {{weight.cSharp}}</span></span>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="calc.js"> JavaScript
+            </label>
+          </div>
+          <span class="help-block">Если есть логика на клиентской части или используются компоненты (кобобокс, грид...). <span class="label label-primary">Вес - {{weight.js}}</span></span>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Html
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Css
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Sql
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <h2>Слои</h2>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Ui
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Ui Services
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Domain Services
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Domain Model
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Data Access
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Validation
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Infrastructure
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <h2>Фреймворки</h2>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Mvc
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Backbone
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> EntityFramework
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Bootstrap
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <h2>Компоненты</h2>
+          <h3>Формы</h3>
+          <div class="form-group">
+            <label class="col-md-6 control-label">Новые</label>
+            <div class="col-md-4">
+              <input type="number" class="form-control" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-6 control-label">Расширение</label>
+            <div class="col-md-4">
+              <input type="number" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-6 control-label">Логика</label>
+            <div class="col-md-4">
+              <input type="number" class="form-control">
+            </div>
+          </div>
+          <h3>Доменные модели</h3>
+          <div class="form-group">
+            <label class="col-md-6 control-label">Новые</label>
+            <div class="col-md-4">
+              <input type="number" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-6 control-label">Расширение</label>
+            <div class="col-md-4">
+              <input type="number" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-6 control-label">Логика</label>
+            <div class="col-md-4">
+              <input type="number" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <p class="text-primary">Итого: {{result()}}</p>
+      </div>
+    </form>
+  </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="js/taskCtrl.js"></script>
+  </body>
+</html>
