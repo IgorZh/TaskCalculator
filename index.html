@@ -12,130 +12,97 @@
       <script src="../../assets/js/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body ng-controller="TaskCtrl">
     <div class="container">
     <div class="page-header">
-      <h1>Расчет сложности задачи.</h1>
+      <h2>Расчет сложности задачи.
+
+      </h2>
+
     </div>
     <ul class="nav nav-tabs" id="myTab">
       <li><a href="#weight" data-toggle="tab">Веса</a></li>
       <li class="active"><a href="#calc"  data-toggle="tab">Расчет</a></li>
-      <li><a href="#bugs" data-toggle="tab">Ошибки</a></li>
     </ul>
-    <div class="tab-content">
+
+    <div class="tab-content" >
       
-      <div class="tab-pane fade" id="weight">...</div>
-      <div class="tab-pane fade active in" id="calc">
+      <div class="tab-pane fade" id="weight" >
         <div class="row form-horizontal" >
-          <div class="col-md-3">
-            <h2>Языки</h2>
-            <span class="help-block">Языки, на которых придется писать программисту.</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.cSharp"> <span class="label label-primary">C#</span>
-              </label>
-            </div>
-            <span class="help-block">Если предпологается серверная часть, т.е. почти всегда.</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.js"> <span class="label label-primary">JavaScript</span>
-              </label>
-            </div>
-            <span class="help-block">Если есть логика на клиентской части или используются компоненты (кобобокс, грид...).</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.html"> <span class="label label-primary">Html</span>
-              </label>
-            </div>
-            <span class="help-block">Если предпологается клиентская часть.</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.css"> <span class="label label-primary">Css</span>
-              </label>
-            </div>
-            <span class="help-block">Если предпологается клиентская часть.</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.sql"> <span class="label label-primary">Sql</span>
-              </label>
-            </div>
-            <span class="help-block">Если нужно создавать таблицы.</span>
+          <div class="col-md-3" ng-repeat="mes in measurements" >
+            <h2>{{mes.title}}</h2>
+            <span class="help-block">{{mes.description}}</span>
+            <ul class="list-group">
+              <li ng-repeat="(key, value) in mes.items" class="list-group-item">
+                <div class="input-group">
+                  <span class="input-group-addon">{{value.title}}</span>
+                  <input type="number" class="form-control" placeholder="Username" ng-model="weight[key]">
+                </div>
+                <span class="help-block">{{value.description}}</span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3" >
+            <h2>{{units.title}}</h2>
+            <span class="help-block">{{units.description}}</span>
+            <ul class="list-group">
+              <li ng-repeat="(key, value) in units.layers" class="list-group-item">
+                <h4><span class="label label-primary">{{value.title}}</span></h4>
+                <div class="input-group" ng-repeat="(key, value) in value.items">
+                  <span class="input-group-addon">{{value.title}}</span>
+                  <input type="number" class="form-control" ng-model="weight[key]" />
+                </div>
+                <span class="help-block">{{value.description}}</span>
+              </li>
+            </ul>
           </div>
           <div class="col-md-3">
-            <h2>Слои</h2>
-            <span class="help-block">Слои приложения, затрагиваемые в задаче.</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.ui"> <span class="label label-primary">Ui</span>
-              </label>
-            </div>
-            <span class="help-block">Если предпологается клиентская часть.</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.uiServices"> <span class="label label-primary">Ui Services</span>
-              </label>
-            </div>
-            <span class="help-block">Если создается новый Арм или меняется логика старого.</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.domainServices"> <span class="label label-primary">Domain Services</span>
-              </label>
-            </div>
-            <span class="help-block">Если меняется доменная логика или создается новая.</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.domainModel"> <span class="label label-primary">Domain Model</span>
-              </label>
-            </div>
-            <span class="help-block">Если создаются новые классы доменной модели или меняются старые.</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.dataAccess"> <span class="label label-primary">Data Access</span>
-              </label>
-            </div>
-            <span class="help-block">Если добавляются свойства в модель или создется новая модель.</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.validation"> <span class="label label-primary">Validation</span>
-              </label>
-            </div>
-            <span class="help-block">Если затрагивается валидация.</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.infrastructure"> <span class="label label-primary">Infrastructure</span>
-              </label>
-            </div>
-            <span class="help-block">Новый сервис. Например "рассылка писем".</span>
+            <h2>Код</h2>
+            <span class="help-block">Нашел удачную конфигурацию весов? Хочешь ею поделиться? Отправь код ниже разработчикам.</span>
+            <code ng-repeat="(key, value) in weight">
+              {{key}}: {{value}},</br>
+            </code>
           </div>
-          <div class="col-md-3">
-            <h2>Фреймворки</h2>
-            <span class="help-block">Фреймворки, используемые для решения задачи.</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.mvc"> <span class="label label-primary">Mvc</span>
-              </label>
-            </div>
-            <span class="help-block">Если предпологается клиентская часть.</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.backbone"> <span class="label label-primary">Backbone</span>
-              </label>
-            </div>
-            <span class="help-block">Изменине клиенских компонентов.</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.ef"> <span class="label label-primary">EntityFramework</span>
-              </label>
-            </div>
-            <span class="help-block">Если добавляются свойства в модель или создется новая модель.</span>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="calc.bootstrap">   <span class="label label-primary">Bootstrap</span>
-              </label>
-            </div>
-            <span class="help-block">Если предпологается клиентская часть.</span>
+        </div>
+      </div>
+      <div class="tab-pane fade active in" id="calc">
+        <h3>
+          <span class="label label-warning">Сложность: {{complexity()}}</span>
+          <span class="label label-success">Время: {{time()}}</span>
+          <span class="label label-danger">Итого: {{(time() * complexity()).toFixed()}}</span>
+        </h3>
+        <div class="row form-horizontal" >
+          <div class="col-md-3" ng-repeat="mes in measurements">
+            <h2>{{mes.title}}</h2>
+            <span class="help-block">{{mes.description}}</span>
+            <ul class="list-group">
+              <li ng-repeat="(key, value) in mes.items" class="list-group-item">
+                <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="calc.complexity[key]"> <span class="label label-primary">{{value.title}}</span>
+                </label>
+                </div>
+                <span class="help-block">{{value.description}}</span>
+              </li>
+            </ul>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3" >
+            <h2>{{units.title}}</h2>
+            <span class="help-block">{{units.description}}</span>
+            <ul class="list-group">
+              <li ng-repeat="(key, value) in units.layers" class="list-group-item">
+                <h4><span class="label label-primary">{{value.title}}</span></h4>
+                <div class="form-group" ng-repeat="(key, value) in value.items">
+                  <label class="col-md-6 control-label">{{value.title}}</label>
+                  <div class="col-md-6">
+                    <input type="number" class="form-control" ng-model="calc.time[key]" />
+                  </div>
+                </div>
+                <span class="help-block">{{value.description}}</span>
+              </li>
+            </ul>
+          </div>
+          <!-- <div class="col-md-3">
             <h2>Компоненты</h2>
             <h3>Формы</h3>
             <div class="form-group">
@@ -175,13 +142,12 @@
                 <input type="number" class="form-control">
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="row" >
           <p class="text-primary">Итого: {{result()}}</p>
         </div>
       </div>
-      <div class="tab-pane fade" id="bugs">...</div>
     </div>
 
     
@@ -193,6 +159,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    
     <script src="js/taskCtrl.js"></script>
    <script>
 
